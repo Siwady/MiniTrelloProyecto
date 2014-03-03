@@ -26,7 +26,7 @@ angular.module('app.controllers', [])
         $scope.$root.title = 'AngularJS SPA | Sign In';
         // TODO: Authorize a user
         $scope.login = function () {
-            $location.path('/');
+            $location.path('/login');
             $window.sessionStorage.token = data.token;
             $scope.message = 'Welcome';
             return false;
@@ -41,7 +41,7 @@ angular.module('app.controllers', [])
         $scope.$root.title = 'AngularJS SPA | Register';
         // TODO: Authorize a user
         $scope.register = function () {
-            $location.path('/');
+            $location.path('/register');
             return false;
         };
         $scope.$on('$viewContentLoaded', function () {
