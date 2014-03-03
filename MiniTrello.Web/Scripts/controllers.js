@@ -27,6 +27,21 @@ angular.module('app.controllers', [])
         // TODO: Authorize a user
         $scope.login = function () {
             $location.path('/');
+            $window.sessionStorage.token = data.token;
+            $scope.message = 'Welcome';
+            return false;
+        };
+        $scope.$on('$viewContentLoaded', function () {
+            $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
+        });
+    }])
+
+    // Path: /Register
+    .controller('RegisterCtrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+        $scope.$root.title = 'AngularJS SPA | Register';
+        // TODO: Authorize a user
+        $scope.register = function () {
+            $location.path('/');
             return false;
         };
         $scope.$on('$viewContentLoaded', function () {

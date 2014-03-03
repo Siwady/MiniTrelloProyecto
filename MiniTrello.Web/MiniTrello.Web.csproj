@@ -142,24 +142,38 @@
       <DependentUpon>app.less</DependentUpon>
     </Content>
     <Content Include="Content\app.less" />
+    <Content Include="Content\variables.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
     <Content Include="Content\variables.less" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\controllers.js" />
     <Content Include="Scripts\controllers.spec.js">
       <DependentUpon>controllers.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\Controllers\AboutController.js" />
+    <Content Include="Scripts\Controllers\AccountController.js" />
+    <Content Include="Scripts\Controllers\ErrorController.js" />
+    <Content Include="Scripts\Controllers\HomeController.js" />
     <Content Include="Scripts\directives.js" />
     <Content Include="Scripts\directives.spec.js">
       <DependentUpon>directives.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\Directives\directives.js" />
+    <Content Include="Scripts\Directives\directives.spec.js" />
     <Content Include="Scripts\filters.js" />
     <Content Include="Scripts\filters.spec.js">
       <DependentUpon>filters.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\Filters\filters.js" />
+    <Content Include="Scripts\Filters\filters.spec.js" />
     <Content Include="Scripts\services.js" />
     <Content Include="Scripts\services.spec.js">
       <DependentUpon>services.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\Services\AccountServices.js" />
+    <Content Include="Scripts\Services\services.js" />
+    <Content Include="Scripts\Services\services.spec.js" />
     <Content Include="Scripts\vendor\angular-csp.css" />
     <Content Include="Scripts\vendor\angular-ui-router.js" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
@@ -488,7 +502,7 @@
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Views\Jasmine\SpecRunner.cshtml" />
-    <Content Include="apple-touch-icon-precomposed.png" />
+    <Content Include="Views\apple-touch-icon-precomposed.png" />
     <Content Include="crossdomain.xml" />
     <Content Include="favicon.ico" />
     <Content Include="humans.txt" />
@@ -505,6 +519,7 @@
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\_PageStart.cshtml" />
     <Content Include="Views\About.cshtml" />
+    <Content Include="Views\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
