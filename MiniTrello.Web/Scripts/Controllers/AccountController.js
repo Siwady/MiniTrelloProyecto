@@ -22,21 +22,17 @@ angular.module('app.controllers')
         $scope.login = function () {
             var model = { Email: $scope.Email, Password: $scope.Password };
             AccountServices.login(model);
-            $location.path('/login');
             return false;
         };
-        /*
+        
         $scope.register = function () {
             var model = {
                 FirstName: $scope.FirstName, LastName: $scope.LastName,
                 Email: $scope.Email, Password: $scope.Password, ConfirmPassword: $scope.ConfirmPassword
             };
             AccountServices.register(model);
-            console.log('aaaa');
-            //$location.path('/register');
             return false;
-        };*/
-
+        };
         $scope.$on('$viewContentLoaded', function () {
             $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
         });
