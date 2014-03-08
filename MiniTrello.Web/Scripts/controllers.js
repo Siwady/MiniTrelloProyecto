@@ -65,7 +65,7 @@ angular.module('app.controllers', [])
             };
             //AccountServices.register(account);
             //$location.path('/register');
-            return $http.post('http://minitrelloapis.apphb.com/register', account);
+            return $http.post('http://localhost:1416/register', account);
         };
         $scope.$on('$viewContentLoaded', function () {
             $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });

@@ -20,11 +20,16 @@ namespace App.MiniTrello.Web
 
             bundles.Add(new ScriptBundle("~/js/app").Include(
                 "~/scripts/vendor/angular-ui-router.js",
-                "~/scripts/filters.js",
-                "~/scripts/services.js",
-                "~/scripts/directives.js",
-                "~/scripts/controllers.js",
-                "~/scripts/app.js"));
+                  "~/scripts/Filters/filters.js",
+                  "~/scripts/Services/AccountServices.js",
+                  "~/scripts/Services/BoardServices.js",
+                  "~/scripts/Directives/directives.js",
+                  "~/scripts/Controllers/HomeController.js",
+                  "~/scripts/Controllers/AboutController.js",
+                  "~/scripts/Controllers/ErrorController.js",
+                  "~/scripts/Controllers/BoardController.js",
+                  "~/scripts/Controllers/AccountController.js",
+                  "~/scripts/app.js"));
         }
     }
 }

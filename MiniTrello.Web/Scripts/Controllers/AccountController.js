@@ -14,15 +14,30 @@ angular.module('app.controllers')
 
         $scope.$root.title = 'AngularJS SPA | Sign In';
 
-        $scope.Email = "";
+        $scope.loginModel = { Email: '', Password: '' };
 
-        $scope.Password = "";
+        $scope.registerModel = { Email: '', Password: '', FirstName: '', LastName: '', ConfirmPassword: '' };
+
+        $scope.isLogged = function() {
+            return $window.sessionStorage.token != null;
+        };
 
         // TODO: Authorize a user
         $scope.login = function () {
-            var model = { Email: $scope.Email, Password: $scope.Password };
-            AccountServices.login(model);
-            return false;
+            AccountServices
+                .login($scope.loginModel)
+              .success(function (data, status, headers, config) {
+                  
+                  $window.sessionStorage.token = data.Token;
+                  $location.path('/boards');
+              })
+              .error(function (data, status, headers, config) {
+                  // Erase the token if the user fails to log in
+                  delete $window.sessionStorage.token;
+
+                  // Handle login errors here
+                  $scope.message = 'Error: Invalid user or password';
+              });
         };
         
         $scope.register = function () {
