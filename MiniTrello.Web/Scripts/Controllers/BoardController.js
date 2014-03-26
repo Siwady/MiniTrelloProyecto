@@ -7,10 +7,11 @@ angular.module('app.controllers')
 
 
     // Path: /login
-    .controller('BoardController', ['$scope', '$location', '$window', 'BoardServices', function ($scope, $location, $window, boardServices) {
+    .controller('BoardController', ['$scope', '$location', '$window', 'BoardServices','OrganizationServices', function ($scope, $location, $window, boardServices,organizationServices) {
     
        
-        $scope.organizations = [
+        $scope.organizations =
+        /*[
             {
                 Title: 'My Boards',
                 boards: [
@@ -26,18 +27,25 @@ angular.module('app.controllers')
                     { Title: 'Myboard5', Administrator: 'Edward5' }
                 ]
             }
-        ];
-        
-        
-            
-    
-            // TODO: Authorize a user
+        ];*/
+
+
+    $scope.getOrganizationsForLoggedUser = function() {
+        organizationServices.getOrganizationsForLoggedUser().success(function(data, status, headers, config) {
+            $scope.organizations = data;
+        }).error(function(data, status, headers, config) {
+
+        });
+    };
+
+       
+    // TODO: Authorize a user
             $scope.getBoardsForLoggedUser = function () {
         
                     boardServices
                         .getBoardsForLoggedUser()
                       .success(function (data, status, headers, config) {
-                                $scope.boards = data;
+                                //$scope.boards = data;
                             })
                       .error(function (data, status, headers, config) {
             

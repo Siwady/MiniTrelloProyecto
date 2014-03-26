@@ -10,7 +10,18 @@ angular.module('app.controllers')
     // Path: /login
     .controller('AccountController', ['$scope', '$location', '$window', 'AccountServices', function ($scope, $location, $window, AccountServices) {
 
+        $scope.getOrganizationsForLoggedUser = function () {
 
+            AccountServices
+                .getOrganizationsForLoggedUser()
+              .success(function (data, status, headers, config) {
+                  $scope.organizations = data;
+              })
+              .error(function (data, status, headers, config) {
+
+              });
+            //$location.path('/');
+        };
 
         $scope.$root.title = 'AngularJS SPA | Sign In';
 
@@ -24,12 +35,15 @@ angular.module('app.controllers')
 
         // TODO: Authorize a user
         $scope.login = function () {
+            var model = {
+                Email: $scope.Email, Password: $scope.Password
+            };
             AccountServices
-                .login($scope.loginModel)
+                .login(model)
               .success(function (data, status, headers, config) {
                   
                   $window.sessionStorage.token = data.Token;
-                  $location.path('/boards');
+                  $location.path('/organizations');
               })
               .error(function (data, status, headers, config) {
                   // Erase the token if the user fails to log in
@@ -45,7 +59,28 @@ angular.module('app.controllers')
                 FirstName: $scope.FirstName, LastName: $scope.LastName,
                 Email: $scope.Email, Password: $scope.Password, ConfirmPassword: $scope.ConfirmPassword
             };
-            AccountServices.register(model);
+            AccountServices.register(model).success(function (data, status, headers, config) {
+                console.log(data);
+                $location.path('/login');
+            })
+            .error(function (data, status, headers, config) {
+                console.log(data);
+            });
+            
+            return false;
+        };
+        $scope.resetPassword = function () {
+            var model = {
+                Email: $scope.Email
+            };
+            AccountServices.resetPassword(model).success(function (data, status, headers, config) {
+                console.log(data);
+                $location.path('/login');
+            })
+            .error(function (data, status, headers, config) {
+                console.log(data);
+            });
+
             return false;
         };
         $scope.$on('$viewContentLoaded', function () {

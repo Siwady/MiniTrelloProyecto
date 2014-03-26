@@ -20,7 +20,7 @@ namespace MiniTrello.DatabaseDeployer
         {
             IList<Account> accountList = Builder<Account>.CreateListOfSize(10).Build();
             accountList.ElementAt(0).Email ="siwady0908@gmail.com";
-            accountList.ElementAt(0).Password = "jajaja1";
+            accountList.ElementAt(0).Password = "tL7nS3PhT2UABFJxFZhHBw==";
 
             foreach (Account account in accountList)
             {

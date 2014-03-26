@@ -156,6 +156,7 @@
     <Content Include="Scripts\Controllers\BoardController.js" />
     <Content Include="Scripts\Controllers\ErrorController.js" />
     <Content Include="Scripts\Controllers\HomeController.js" />
+    <Content Include="Scripts\Controllers\OrganizationsController.js" />
     <Content Include="Scripts\directives.js" />
     <Content Include="Scripts\directives.spec.js">
       <DependentUpon>directives.js</DependentUpon>
@@ -174,6 +175,7 @@
     </Content>
     <Content Include="Scripts\Services\AccountServices.js" />
     <Content Include="Scripts\Services\BoardServices.js" />
+    <Content Include="Scripts\Services\OrganizationServices.js" />
     <Content Include="Scripts\vendor\angular-csp.css" />
     <Content Include="Scripts\vendor\angular-ui-router.js" />
     <Content Include="Scripts\vendor\angular-ui-router.min.js" />
@@ -521,6 +523,8 @@
     <Content Include="Views\About.cshtml" />
     <Content Include="Views\Register.cshtml" />
     <Content Include="Views\Boards.cshtml" />
+    <Content Include="Views\ResetPassword.cshtml" />
+    <Content Include="Views\Organizations.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

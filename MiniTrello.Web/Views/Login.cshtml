@@ -13,6 +13,9 @@
                     <div class="panel-body">
                         <form accept-charset="UTF-8" role="form">
                             <fieldset>
+                                <ul class="ds-btn nav navbar-nav navbar-right">
+                                    <a href="./resetPassword">Forgot Password</a>
+                                </ul>
                                 <div class="form-group">
                                     <input ng-model="Email" class="form-control" placeholder="Email" name="Email" type="text">
                                 </div>
@@ -20,10 +23,17 @@
                                     <input ng-model="Password" class="form-control" placeholder="Password" name="Password" type="password" value="">
                                 </div>
                                 <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me"> Remember Me
-                                    </label>
+                                    
+                                    <ul class="ds-btn nav navbar-nav navbar-left">
+                                        <li>
+                                            <label>
+                                                <input name="remember" type="checkbox" value="Remember Me"> Remember Me
+                                            </label>
+                                        </li>
+                                        
+                                    </ul>
                                 </div>
+                                
                                 <input ng-click=" login()" class="btn btn-lg btn-success btn-block" type="submit" value="Login">
                             </fieldset>
                         </form>

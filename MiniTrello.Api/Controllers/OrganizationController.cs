@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -76,21 +77,29 @@ namespace MiniTrello.Api.Controllers
         }
 
         [AcceptVerbs("GET")]
-        [GET("organization/boards/{idOrganization}/{accesToken}")]
-        public ReturnModel MembersList(long idOrganization, string accesToken)
+        [GET("organizations/{accessToken}")]
+        public ReturnModel GetOrganizations(string accessToken)
         {
-            var account = _readOnlyRepository.First<Account>(account1 => account1.Token == accesToken);
-            ReturnModel remodel=new ReturnModel();
+            var account = _readOnlyRepository.First<Account>(account1 => account1.Token == accessToken);
+            ReturnModel remodel = new ReturnModel();
             if (account != null)
             {
                 if (account.VerifyToken(account))
                 {
-                    var organization = _readOnlyRepository.GetById<Organization>(idOrganization);
-                    ReturnBoardsModel boardmodel = new ReturnBoardsModel();
-                    boardmodel = _mappingEngine.Map<Organization, ReturnBoardsModel>(organization);
-                    return boardmodel.ConfigureModel("SuccessFull", "", boardmodel);
+
+                    ReturnOrganizationsModel organizationsmodel = _mappingEngine.Map<Account, ReturnOrganizationsModel>(account);
+                    ReturnOrganizationsModel organ = new ReturnOrganizationsModel();
+                    organ.Organizations = new List<Organization>();
+                    foreach (var or in organizationsmodel.Organizations)
+                    {
+                        Organization o = new Organization();
+                        o.Title = or.Title;
+                        o.Id = or.Id;
+                        organ.Organizations.Add(o);
+                    }
+                    return organ.ConfigureModel("Successfull", "", organ);
                 }
-                return remodel.ConfigureModel("Error", "Su session ya expiro", remodel); 
+                return remodel.ConfigureModel("Error", "Su session ya expiro", remodel);
             }
             return remodel.ConfigureModel("Error", "No se pudo acceder a su cuenta", remodel);
         }

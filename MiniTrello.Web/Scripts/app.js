@@ -34,10 +34,21 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
                 templateUrl: '/views/register',
                 controller: 'AccountController'
             })
+            .state('resetPassword', {
+                url: '/resetPassword',
+                layout: 'basic',
+                templateUrl: '/views/resetPassword',
+                controller: 'AccountController'
+            })
             .state('boards', {
                 url: '/boards',
                 templateUrl: '/views/boards',
                 controller: 'BoardController'
+            })
+            .state('organizations', {
+                url: '/organizations',
+                templateUrl: '/views/organizations',
+                controller: 'OrganizationsController'
             })
             .state('otherwise', {
                 url: '*path',
