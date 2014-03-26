@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Resources;
 using System.Windows;
@@ -6,6 +7,7 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using MiniTrello.Domain.Entities;
 using MiniTrello.Win8Phone.Resources;
 namespace MiniTrello.Win8Phone
 {
@@ -16,6 +18,9 @@ namespace MiniTrello.Win8Phone
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
+
+        public static object Token { get; set; }
+        public static IList<Organization> ListOrganizations { get; set; }
 
         /// <summary>
         /// Constructor for the Application object.

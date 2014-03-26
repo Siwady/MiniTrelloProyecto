@@ -27,12 +27,12 @@ namespace MiniTrello.Win8Phone
             model.LastName = LastName.Text;
             model.Email = Email.Text;
             model.Password = Password.Password;
-            model.Password = ConfirmPassword.Password;
-            var client = new RestClient("http://minitrelloapis.apphb.com/");
+            model.ConfirmPassword = ConfirmPassword.Password;
+            var client = new RestClient("http://minitrelloapis.apphb.com");
             var request = new RestRequest("/register", Method.POST);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(model);
-            var asyncHandler = client.ExecuteAsync<ReturnRegisterModel>(request, r =>
+            var asyncHandler = client.ExecuteAsync<ReturnModel>(request, r =>
             {
                 if (r.ResponseStatus == ResponseStatus.Completed)
                 {

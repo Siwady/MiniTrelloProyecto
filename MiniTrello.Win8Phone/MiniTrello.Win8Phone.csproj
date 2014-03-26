@@ -177,6 +177,10 @@
       <Project>{BCA0B89B-CCC5-4534-952B-78FD57C8CBB6}</Project>
       <Name>MiniTrello.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MiTrello.Domain\MiniTrello.Domain.csproj">
+      <Project>{ECDF8611-C8A9-42B8-A412-0450EFAE0AEB}</Project>
+      <Name>MiniTrello.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

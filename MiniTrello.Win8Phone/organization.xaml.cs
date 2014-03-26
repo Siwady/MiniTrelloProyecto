@@ -7,6 +7,9 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using MiniTrello.Api.Models;
+using MiniTrello.Domain.Entities;
+using RestSharp;
 
 namespace MiniTrello.Win8Phone
 {
@@ -14,6 +17,24 @@ namespace MiniTrello.Win8Phone
     {
         public organization()
         {
+            var client = new RestClient("http://minitrelloapis.apphb.com");
+            var request = new RestRequest();
+            string resource = "/organizations/" + App.Token;
+            request.Resource = resource;
+            request.Method = Method.GET;
+            
+            //request.RequestFormat = DataFormat.Json;
+            var asyncHandler = client.ExecuteAsync<ReturnOrganizationsModel>(request, r =>
+            {
+                if (r.ResponseStatus == ResponseStatus.Completed)
+                {
+                    if (r.Data != null)
+                    {
+                        App.ListOrganizations = (IList<Organization>) r.Data.Organizations;
+                        //NavigationService.Navigate(new Uri("/organization.xaml", UriKind.Relative));
+                    }
+                }
+            });
             InitializeComponent();
         }
     }

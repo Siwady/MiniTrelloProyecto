@@ -92,10 +92,13 @@ namespace MiniTrello.Api.Controllers
                     organ.Organizations = new List<Organization>();
                     foreach (var or in organizationsmodel.Organizations)
                     {
-                        Organization o = new Organization();
-                        o.Title = or.Title;
-                        o.Id = or.Id;
-                        organ.Organizations.Add(o);
+                        if (!or.IsArchived)
+                        {
+                            Organization o = new Organization();
+                            o.Title = or.Title;
+                            o.Id = or.Id;
+                            organ.Organizations.Add(o);
+                        }
                     }
                     return organ.ConfigureModel("Successfull", "", organ);
                 }

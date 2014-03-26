@@ -29,8 +29,8 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="10,10,14,-10">
             <Button Content="Enter" HorizontalAlignment="Left" Margin="0,202,0,0" VerticalAlignment="Top" Width="205" Click="Button_Click"/>
-            <TextBox HorizontalAlignment="Left" Height="72" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
-            <PasswordBox HorizontalAlignment="Left" Margin="0,130,0,0" VerticalAlignment="Top" Width="446"/>
+            <TextBox x:Name="Email" HorizontalAlignment="Left" Height="72" Margin="0,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
+            <PasswordBox x:Name="Password" HorizontalAlignment="Left" Margin="0,130,0,0" VerticalAlignment="Top" Width="446"/>
             <Button Content="Register" HorizontalAlignment="Left" Margin="249,202,0,0" VerticalAlignment="Top" Width="197" Click="Button_Click_1"/>
             <TextBlock HorizontalAlignment="Left" Margin="13,22,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="13,114,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top"/>
