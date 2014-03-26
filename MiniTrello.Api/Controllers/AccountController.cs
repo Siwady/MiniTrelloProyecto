@@ -94,7 +94,7 @@ namespace MiniTrello.Api.Controllers
                     request.AddParameter("text", "Bienvenido a MiniTrello "+model.FirstName+"!");
                     request.Method = Method.POST;
                     client.Execute(request);
-                    return remodel.ConfigureModel("Successfull", "Se Registro Correctamente", remodel);
+                    return remodel.ConfigureModel("Successfull", "Se Registro Correctamente", registermodel);
                 }
                 return remodel.ConfigureModel("Error", "Error al Guardar el Usuario", remodel);
             }

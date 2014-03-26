@@ -28,7 +28,7 @@ namespace MiniTrello.Win8Phone
             model.Email = Email.Text;
             model.Password = Password.Password;
             model.Password = ConfirmPassword.Password;
-            var client = new RestClient("");
+            var client = new RestClient("http://minitrelloapis.apphb.com/");
             var request = new RestRequest("/register", Method.POST);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(model);
