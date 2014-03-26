@@ -76,8 +76,8 @@ namespace MiniTrello.Api.Controllers
             return remodel.ConfigureModel("Error", "No se pudo acceder a su cuenta", remodel);
         }
 
-        [AcceptVerbs("GET")]
-        [GET("organizations/{accessToken}")]
+        [AcceptVerbs("PUT")]
+        [PUT("organizations/{accessToken}")]
         public ReturnModel GetOrganizations(string accessToken)
         {
             var account = _readOnlyRepository.First<Account>(account1 => account1.Token == accessToken);

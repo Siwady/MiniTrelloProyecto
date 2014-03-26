@@ -18,12 +18,8 @@ namespace MiniTrello.Win8Phone
         public organization()
         {
             var client = new RestClient("http://minitrelloapis.apphb.com");
-            var request = new RestRequest();
-            string resource = "/organizations/" + App.Token;
-            request.Resource = resource;
-            request.Method = Method.GET;
-            
-            //request.RequestFormat = DataFormat.Json;
+            var request = new RestRequest("/organizations/"+App.Token, Method.PUT);
+            request.RequestFormat = DataFormat.Json;
             var asyncHandler = client.ExecuteAsync<ReturnOrganizationsModel>(request, r =>
             {
                 if (r.ResponseStatus == ResponseStatus.Completed)
