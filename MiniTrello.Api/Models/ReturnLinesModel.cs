@@ -5,6 +5,6 @@ namespace MiniTrello.Api.Models
 {
     public class ReturnLinesModel: ReturnModel
     {
-        public List<Lines> Lines { set; get; }
+        public IList<Lines> Lines { set; get; }
     }
 }
