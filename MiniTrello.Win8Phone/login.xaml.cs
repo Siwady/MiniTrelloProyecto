@@ -46,11 +46,6 @@ namespace MiniTrello.Win8Phone
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
-            /*var client = new RestClient("fsd");
-                var request = new RestRequest("/login", Method.POST);
-                request.RequestFormat = DataFormat.Json;
-                request.AddBody(loginModel);*/
             NavigationService.Navigate(new Uri("/register.xaml", UriKind.Relative));
         }
     }

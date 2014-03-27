@@ -217,6 +217,8 @@
     <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Models\ReturnActivitiesModel.cs" />
     <Compile Include="Models\ReturnBoardsModel.cs" />
+    <Compile Include="Models\ReturnCardsModel.cs" />
+    <Compile Include="Models\ReturnLinesModel.cs" />
     <Compile Include="Models\ReturnMembersModel.cs" />
     <Compile Include="Models\ReturnModel.cs" />
     <Compile Include="Models\ReturnOrganizationModel.cs" />

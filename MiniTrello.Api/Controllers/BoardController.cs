@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -136,6 +137,40 @@ namespace MiniTrello.Api.Controllers
             return _mappingEngine.Map<Board, ReturnMembersModel>(board);
         }
 
-       
+        [AcceptVerbs("GET")]
+        [GET("boards/{organizationId}/{accessToken}")]
+        public ReturnModel GetOrganizations(long organizationId, string accessToken)
+        {
+            var account = _readOnlyRepository.First<Account>(account1 => account1.Token == accessToken);
+            ReturnModel remodel = new ReturnModel();
+            if (account != null)
+            {
+                if (account.VerifyToken(account))
+                {
+                    var organization = _readOnlyRepository.GetById<Organization>(organizationId);
+                    if (organization != null)
+                    {
+                        ReturnBoardsModel boardsModel = _mappingEngine.Map<Organization, ReturnBoardsModel>(organization);
+                        var boards = new ReturnBoardsModel();
+                        boards.Boards = new List<Board>();
+                        foreach (var or in boardsModel.Boards)
+                        {
+                            if (!or.IsArchived)
+                            {
+                                var o = new Board();
+                                //o.Administrator = or.Administrator;
+                                o.Title = or.Title;
+                                o.Id = or.Id;
+                                boards.Boards.Add(o);
+                            }
+
+                        }
+                        return boards.ConfigureModel("Successfull", "", boards);
+                    }
+                }
+                return remodel.ConfigureModel("Error", "Su session ya expiro", remodel);
+            }
+            return remodel.ConfigureModel("Error", "No se pudo acceder a su cuenta", remodel);
+        }
     }
 }

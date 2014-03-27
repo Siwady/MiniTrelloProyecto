@@ -3,8 +3,8 @@ using MiniTrello.Domain.Entities;
 
 namespace MiniTrello.Api.Models
 {
-    public class ReturnBoardsModel: ReturnModel
+    public class ReturnLinesModel: ReturnModel
     {
-        public List<Board> Boards { get; set; }
+        public List<Lines> Lines { set; get; }
     }
 }

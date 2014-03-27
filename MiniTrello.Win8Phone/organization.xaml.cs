@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,7 @@ using Microsoft.Phone.Shell;
 using MiniTrello.Api.Models;
 using MiniTrello.Domain.Entities;
 using RestSharp;
+using System.Windows.Media;
 
 namespace MiniTrello.Win8Phone
 {
@@ -28,11 +30,38 @@ namespace MiniTrello.Win8Phone
                 {
                     if (r.Data != null)
                     {
-                        //App.ListOrganizations
+                        App.ListOrganizations = (IList<Organization>) r.Data.Organizations;
+                        Dibujar();
                     }
                 }
             });
             InitializeComponent();
+        }
+
+        private void Dibujar()
+        {
+            var x = 40;
+            var y = 200;
+            
+            foreach (var organizations in App.ListOrganizations)
+            {
+                Button btn = new Button() { Content = organizations.Title };
+                btn.Width = 210;
+                btn.Height = 66;
+                
+                btn.Tag = organizations.Id;
+                btn.Foreground = new SolidColorBrush(Colors.Green);
+                btn.Click += new RoutedEventHandler(btn_Click);
+                lb1.Items.Add(btn);
+                y += 100;
+            }
+
+        }
+        void btn_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button != null)
+                NavigationService.Navigate(new Uri("/board.xaml?parameter="+button.Tag, UriKind.Relative));
         }
     }
 }

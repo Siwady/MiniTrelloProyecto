@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -102,6 +103,41 @@ namespace MiniTrello.Api.Controllers
                     account.AddActivities(activity);
                     var accountUpdate = _writeOnlyRepository.Update(account);
                     return remodel.ConfigureModel("Successfull", "Se movio correctamente la card", remodel);
+                }
+                return remodel.ConfigureModel("Error", "Su session ya expiro", remodel);
+            }
+            return remodel.ConfigureModel("Error", "No se pudo acceder a su cuenta", remodel);
+        }
+
+        [AcceptVerbs("GET")]
+        [GET("cards/{lineId}/{accessToken}")]
+        public ReturnModel GetCards(long lineId, string accessToken)
+        {
+            var account = _readOnlyRepository.First<Account>(account1 => account1.Token == accessToken);
+            ReturnModel remodel = new ReturnModel();
+            if (account != null)
+            {
+                if (account.VerifyToken(account))
+                {
+                    var line = _readOnlyRepository.GetById<Lines>(lineId);
+                    if (line != null)
+                    {
+                        ReturnCardsModel cardsModel = _mappingEngine.Map<Lines, ReturnCardsModel>(line);
+                        var cards = new ReturnCardsModel();
+                        cards.Cards = new List<Cards>();
+                        foreach (var or in cardsModel.Cards)
+                        {
+                            if (!or.IsArchived)
+                            {
+                                var o = new Cards();
+                                o.Text = or.Text;
+                                o.Id = or.Id;
+                                cards.Cards.Add(o);
+                            }
+
+                        }
+                        return cards.ConfigureModel("Successfull", "", cards);
+                    }
                 }
                 return remodel.ConfigureModel("Error", "Su session ya expiro", remodel);
             }
