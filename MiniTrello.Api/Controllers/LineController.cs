@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -62,34 +64,45 @@ namespace MiniTrello.Api.Controllers
         [GET("lines/{boardId}/{accessToken}")]
         public ReturnModel GetOrganizations(long boardId, string accessToken)
         {
-            var account = _readOnlyRepository.First<Account>(account1 => account1.Token == accessToken);
             ReturnModel remodel = new ReturnModel();
-            if (account != null)
+            try
             {
-                if (account.VerifyToken(account))
+                var account = _readOnlyRepository.First<Account>(account1 => account1.Token == accessToken);
+                
+                if (account != null)
                 {
-                    var board = _readOnlyRepository.GetById<Board>(boardId);
-                    if (board != null)
+                    if (account.VerifyToken(account))
                     {
-                        ReturnLinesModel boardsModel = _mappingEngine.Map<Board, ReturnLinesModel>(board);
-                        var lines = new ReturnLinesModel();
-                        lines.Lines = new List<Lines>();
-                        foreach (var or in boardsModel.Lines)
+                        var board = _readOnlyRepository.GetById<Board>(boardId);
+                        if (board != null)
                         {
-                            if (!or.IsArchived)
+                            ReturnLinesModel boardsModel = _mappingEngine.Map<Board, ReturnLinesModel>(board);
+                            var lines = new ReturnLinesModel();
+                            lines.Lines = new List<Lines>();
+                            foreach (var or in boardsModel.Lines)
                             {
-                                var o = new Lines();
-                                o.Title = or.Title;
-                                o.Id = or.Id;
-                                lines.Lines.Add(o);
+                                if (!or.IsArchived)
+                                {
+                                    var o = new Lines();
+                                    o.Title = or.Title;
+                                    o.Id = or.Id;
+                                    lines.Lines.Add(o);
+                                }
                             }
+                            return lines.ConfigureModel("Successfull", "", lines);
                         }
-                        return lines.ConfigureModel("Successfull", "", lines);
                     }
+                    return remodel.ConfigureModel("Error", "Su session ya expiro", remodel);
                 }
-                return remodel.ConfigureModel("Error", "Su session ya expiro", remodel);
+                return remodel.ConfigureModel("Error", "No se pudo acceder a su cuenta", remodel);
             }
-            return remodel.ConfigureModel("Error", "No se pudo acceder a su cuenta", remodel);
+            catch (Exception e)
+            {
+                return remodel.ConfigureModel("Error", e.Message, remodel);
+            }
+            
+
+            
         }
     }
 }
