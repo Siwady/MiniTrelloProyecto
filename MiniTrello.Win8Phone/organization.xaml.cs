@@ -18,16 +18,17 @@ namespace MiniTrello.Win8Phone
         public organization()
         {
             var client = new RestClient("http://minitrelloapis.apphb.com");
-            var request = new RestRequest("/organizations/"+App.Token, Method.PUT);
+            var request = new RestRequest("/organizations/" + App.Token, Method.GET);
             request.RequestFormat = DataFormat.Json;
+
+            //el model es el error
             var asyncHandler = client.ExecuteAsync<ReturnOrganizationsModel>(request, r =>
             {
                 if (r.ResponseStatus == ResponseStatus.Completed)
                 {
                     if (r.Data != null)
                     {
-                        App.ListOrganizations = (IList<Organization>) r.Data.Organizations;
-                        //NavigationService.Navigate(new Uri("/organization.xaml", UriKind.Relative));
+                        //App.ListOrganizations
                     }
                 }
             });

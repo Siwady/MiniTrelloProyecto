@@ -5,7 +5,6 @@ namespace MiniTrello.Api.Models
 {
     public class ReturnOrganizationsModel:ReturnModel
     {
-        public IList<Organization> Organizations { set; get; }
-        public long Id { set; get; }
+        public List<Organization> Organizations { set; get; }
     }
 }
