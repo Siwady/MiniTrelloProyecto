@@ -111,7 +111,7 @@ namespace MiniTrello.Api.Controllers
 
         [AcceptVerbs("GET")]
         [GET("cards/{lineId}/{accessToken}")]
-        public ReturnModel GetCards(long lineId, string accessToken)
+        public ReturnModel GetOrganizations(long lineId, string accessToken)
         {
             var account = _readOnlyRepository.First<Account>(account1 => account1.Token == accessToken);
             ReturnModel remodel = new ReturnModel();

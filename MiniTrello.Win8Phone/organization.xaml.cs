@@ -40,20 +40,17 @@ namespace MiniTrello.Win8Phone
 
         private void Dibujar()
         {
-            var x = 40;
-            var y = 200;
-            
             foreach (var organizations in App.ListOrganizations)
             {
                 Button btn = new Button() { Content = organizations.Title };
                 btn.Width = 210;
                 btn.Height = 66;
-                
+              
                 btn.Tag = organizations.Id;
                 btn.Foreground = new SolidColorBrush(Colors.Green);
                 btn.Click += new RoutedEventHandler(btn_Click);
                 lb1.Items.Add(btn);
-                y += 100;
+               
             }
 
         }
@@ -61,7 +58,11 @@ namespace MiniTrello.Win8Phone
         {
             Button button = sender as Button;
             if (button != null)
-                NavigationService.Navigate(new Uri("/board.xaml?parameter="+button.Tag, UriKind.Relative));
+            {
+                App.OrganizationId =button.Tag.ToString();
+                NavigationService.Navigate(new Uri("/board.xaml", UriKind.Relative));
+            }
+                
         }
     }
 }
